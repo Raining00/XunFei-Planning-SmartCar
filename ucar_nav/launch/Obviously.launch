@@ -1,0 +1,39 @@
+<launch>
+  <master auto="start"/>
+  <arg name="map" value="map2021513"/>
+  <param name="/use_sim_time" value="false"/>
+  <!--Load parameters for localization node  -->
+  <rosparam command="load" file="$(find roborts_localization)/config/localization.yaml" />
+  <rosparam command="load" file="$(find roborts_localization)/amcl/config/amcl.yaml" />
+    <!-- 运行地图服务器，并且加载设置的地图-->
+    <node name="map_server" pkg="map_server" type="map_server" args="$(find ucar_nav)/maps/$(arg map).yaml" output="screen">
+    <param name="frame_id" value="map" />
+    </node>
+
+    <include file="$(find ucar_controller)/launch/base_driver.launch" > </include>
+    <include file="$(find ydlidar)/launch/ydlidar.launch" > </include>
+
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
+    <rosparam command="load" file="$(find ucar_nav)/param/ekf_param/ekf_params_twodom_imu.yaml"/>
+    </node>
+
+    <!-- 运行amcl节点 -->
+  <node pkg="roborts_localization" type="localization_node" name="localization_node" respawn="false" />
+
+<!-- Run the global planner node -->
+  <node pkg="roborts_planning" type="global_planner_node" name="global_planner_node" respawn="false" />
+
+  <!-- Run the local planner node -->
+  <node pkg="roborts_planning" type="local_planner_node" name="local_planner_node" respawn="false" />
+
+  <node pkg="roborts_planning" type="vel_converter" name="vel_converter_node" respawn="false" />
+
+
+ <node pkg="roborts_decision" type="sel_behavior_node" name="sel_behavior_node" respawn="false" output="screen"/>
+</launch>
+
+
+
+
+
+

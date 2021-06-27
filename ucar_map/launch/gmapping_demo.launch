@@ -1,0 +1,12 @@
+<launch>
+
+   <param name="/use_sim_time" value="false"/>
+
+  <include file="$(find ucar_controller)/launch/base_driver.launch" > </include>
+    <include file="$(find ydlidar)/launch/ydlidar.launch" > </include>
+ 
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
+    <rosparam command="load" file="$(find ucar_nav)/param/ekf_param/ekf_params_twodom_imu.yaml"/>
+    </node>
+  <include file="$(find ucar_map)/launch/gmapping.launch"/>
+</launch>
