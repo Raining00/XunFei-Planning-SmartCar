@@ -1,0 +1,19 @@
+<launch>
+   <param name="/use_sim_time" value="false"/>
+
+  <!--Load parameters for localization node  -->
+  <rosparam command="load" file="$(find roborts_localization)/config/localization.yaml" />
+  <rosparam command="load" file="$(find roborts_localization)/amcl/config/amcl.yaml" />
+
+  <include file="$(find ucar_controller)/launch/base_driver.launch" > </include>
+    <include file="$(find ydlidar)/launch/ydlidar.launch" > </include>
+
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
+    <rosparam command="load" file="$(find ucar_nav)/param/ekf_param/ekf_params_twodom_imu.yaml"/>
+    </node>
+
+    <!-- 运行amcl节点 -->
+  <node pkg="roborts_localization" type="localization_node" name="localization_node" respawn="false" />
+  <!-- cartographer launch -->
+  <include file="$(find ucar_map)/launch/cartographer_start.launch"/>
+</launch>

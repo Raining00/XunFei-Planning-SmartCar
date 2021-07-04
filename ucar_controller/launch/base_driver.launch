@@ -1,0 +1,12 @@
+<launch>
+  <node pkg="ucar_controller" name="base_driver" type="base_driver"  >
+    <rosparam command="load" file="$(find ucar_controller)/config/driver_params_mini.yaml" />
+    <!-- <rosparam command="load" file="$(find ucar_controller)/config/driver_params_xiao.yaml" /> -->
+  </node>
+
+      <node pkg="tf" type="static_transform_publisher" name="imu_link"
+    args="0.05 -0.05 0.0 0.0 0.0  0.0 /base_link /imu 10" />
+
+
+  <!-- <node pkg="joy" name="joy_node" type="joy_node"/> -->
+</launch> 
