@@ -89,22 +89,22 @@
 
 ```
 .
-├── 2d_lidar_undistortion-master		#激光雷达畸变矫正功能包
+├── 2d_lidar_undistortion-master				#激光雷达畸变矫正功能包
 │   ├── CMakeLists.txt
 │   ├── launch
-│   │   ├── lidar_undistortion_offline.launch	#仿真启动文件
-│   │   └── lidar_undistortion_online.launch	#在线机器人平台启动文件
+│   │   ├── lidar_undistortion_offline.launch			#仿真启动文件
+│   │   └── lidar_undistortion_online.launch			#在线机器人平台启动文件
 │   ├── LICENSE
 │   ├── package.xml
 │   ├── pics
-│   │   └── result.png				#矫正效果测试图
+│   │   └── result.png						#矫正效果测试图
 │   ├── README.md
 │   ├── rviz
 │   │   └── lidar_undistortion.rviz
 │   └── src
-│       └── lidar_undistortion.cpp		#激光雷达矫正算法实现
+│       └── lidar_undistortion.cpp				#激光雷达矫正算法实现
 ├── CMakeLists.txt
-├── fdilink_ahrs				#IMU固件包
+├── fdilink_ahrs						#IMU固件包
 │   ├── CMakeLists.txt
 │   ├── include
 │   ├── launch
@@ -113,19 +113,19 @@
 │   └── src
 ├── README.en.md
 ├── README.md
-├── roborts_common				#通用依赖包，定义了一些数学算法以及proto文件读取模板
+├── roborts_common						#通用依赖包，定义了一些数学算法以及proto文件读取模板
 │   ├── CMakeLists.txt
 │   ├── cmake_module
 │   ├── include
-│   ├── math								#自定义数学工具
+│   ├── math							#自定义数学工具
 │   │   ├── CMakeLists.txt
 │   │   ├── geometry.h
 │   │   └── math.h
 │   └── package.xml
-├── roborts_costmap				#代价地图相关
+├── roborts_costmap						#代价地图相关
 │   ├── CMakeLists.txt
 │   ├── cmake_module
-│   ├── config					# 决策、规划中costmap配置以及costmap各层参数设置
+│   ├── config							# 决策、规划中costmap配置以及costmap各层参数设置
 │   │   ├── costmap_parameter_config_for_decision.prototxt	
 │   │   ├── costmap_parameter_config_for_global_plan.prototxt	#全局代价地图配置
 │   │   ├── costmap_parameter_config_for_local_plan.prototxt	#局部代价地图配置
@@ -145,66 +145,66 @@
 │       ├── costmap_interface.cpp
 │       ├── costmap_layer.cpp
 │       ├── costmap_math.cpp
-│       ├── detection_layer.cpp					#检测层
-│       ├── dynamic_obstacle_layer.cpp				#动态障碍层
+│       ├── detection_layer.cpp				#检测层
+│       ├── dynamic_obstacle_layer.cpp			#动态障碍层
 │       ├── footprint.cpp
-│       ├── friend_layer.cpp					#友方层
+│       ├── friend_layer.cpp				#友方层
 │       ├── inflation_layer.cpp
 │       ├── layer.cpp
 │       ├── layered_costmap.cpp
-│       ├── local_static_layer.cpp				# 局部静态层
+│       ├── local_static_layer.cpp			# 局部静态层
 │       ├── observation_buffer.cpp
 │       ├── obstacle_layer.cpp
 │       ├── static_layer.cpp
 │       └── test_costmap.cpp
 ├── roborts_decision
-│   ├── behavior_tree						#行为树定义
+│   ├── behavior_tree					#行为树定义
 │   │   ├── behavior_node.h
 │   │   ├── behavior_state.h
 │   │   └── behavior_tree.h
 │   ├── blackboard							
 │   │   ├── blackboard.h				#决策框架，管理机器人行为
-│   │   └── communication.h		  #多机器人通信（需要多边协同工作时，才使用）
+│   │   └── communication.h		 		#多机器人通信（需要多边协同工作时，才使用）
 │   ├── CMakeLists.txt
 │   ├── cmake_module
 │   ├── config
-│   │   └── sel_behave.prototxt			#决策配置文件
+│   │   └── sel_behave.prototxt				#决策配置文件
 │   ├── example_behavior
-│   │   ├── chase_behavior.h			#任务调度头文件，包括管理规划等一系列控制
-│   │   └── goal_behavior.h					#导航行为定义，该文件负责管理多点导航
-│   ├── executor										#底盘任务调度模块
+│   │   ├── chase_behavior.h				#任务调度头文件，包括管理规划等一系列控制
+│   │   └── goal_behavior.h				#导航行为定义，该文件负责管理多点导航
+│   ├── executor					#底盘任务调度模块
 │   │   ├── chassis_executor.cpp
 │   │   ├── chassis_executor.h
 │   │   ├── gimbal_executor.cpp
 │   │   └── gimbal_executor.h
 │   ├── package.xml
 │   ├── proto
-│   └── sel_behavior_node.cpp		#实例化机器人行为决策
-├── roborts_localization						#定位算法功能包
+│   └── sel_behavior_node.cpp				#实例化机器人行为决策
+├── roborts_localization				#定位算法功能包
 │   ├── amcl
-│   │   ├── amcl_config.h						#amcl参数类
-│   │   ├── amcl.cpp								#amcl主要逻辑实现
+│   │   ├── amcl_config.h				#amcl参数类
+│   │   ├── amcl.cpp					#amcl主要逻辑实现
 │   │   ├── amcl.h
 │   │   ├── CMakeLists.txt
 │   │   ├── config
-│   │   ├── map												#amcl似然地图相关代码
-│   │   ├── particle_filter							#粒子滤波相关算法
-│   │   └── sensors									#里程计模型与激光雷达传感器模型
+│   │   ├── map						#amcl似然地图相关代码
+│   │   ├── particle_filter				#粒子滤波相关算法
+│   │   └── sensors					#里程计模型与激光雷达传感器模型
 │   ├── CMakeLists.txt
 │   ├── cmake_module
 │   │   ├── FindEigen3.cmake
 │   │   └── FindGlog.cmake
 │   ├── config											
-│   │   └── localization.yaml					#localization参数配置文件，需要在launch file中load
-│   ├── localization_config.h					#localization参数类
+│   │   └── localization.yaml				#localization参数配置文件，需要在launch file中load
+│   ├── localization_config.h				#localization参数类
 │   ├── localization_math.cpp				#模块内通用数学算法
 │   ├── localization_math.h
 │   ├── localization_node.cpp				#定位主节点和main函数
 │   ├── localization_node.h
-│   ├── log.h										#Golg Wrapper
+│   ├── log.h						#Golg Wrapper
 │   ├── package.xml
 │   └── types.h
-├── roborts_msgs									#自定义消息类型
+├── roborts_msgs					#自定义消息类型
 │   ├── action
 │   │   ├── GlobalPlanner.action
 │   │   └── LocalPlanner.action
@@ -289,10 +289,10 @@
 │       ├── SetLEDMode.srv
 │       ├── SetMaxVel.srv
 │       └── SetSensorTF.srv
-├── ucar_map										#SLAM功能启动文件包
+├── ucar_map							#SLAM功能启动文件包
 │   ├── cfg
 │   │   ├── carto_2d.lua					#cartographer算法配置文件
-│   │   ├── localization_2d.lua		#cartographer纯定位配置文件
+│   │   ├── localization_2d.lua					#cartographer纯定位配置文件
 │   │   └── test_2d.lua	
 │   ├── CMakeLists.txt
 │   ├── launch
@@ -300,20 +300,20 @@
 │   │   ├── gmapping_demo.launch				#gmapping建图启动文件
 │   │   ├── gmapping.launch
 │   │   └── ucar_mapping.launch
-│   ├── maps												#占据式栅格地图实例
+│   ├── maps							#占据式栅格地图实例
 │   │   ├── 123.pgm
 │   │   ├── 123.yaml
 │   │   ├── ucar_map_001.pgm
 │   │   └── ucar_map_001.yaml
 │   └── package.xml
-├── ucar_nav											#导航启动管理
+├── ucar_nav							#导航启动管理
 │   ├── CMakeLists.txt
 │   ├── launch
 │   │   ├── amcl_7.launch
 │   │   ├── amcl.launch				
 │   │   ├── Obviously.launch			
 │   │   └── pedestrain.launch
-│   ├── maps										#导航地图存放处
+│   ├── maps							#导航地图存放处
 │   │   ├── 0607.pgm
 │   │   ├── 0607.yaml
 │   │   ├── map1.pgm
@@ -346,7 +346,7 @@
 │   ├── package.xml
 │   ├── param
 │   │   └── ekf_param
-│   └── scripts												#比赛任务调度和管理脚本
+│   └── scripts						#比赛任务调度和管理脚本
 │       ├── 4.py
 │       ├── assist_parking.py
 │       ├── mission_task_amcl.py
@@ -358,7 +358,7 @@
 │       ├── test3.csv
 │       └── test.csv
 ├── xunfei_params					#参数配置保存
-└── ydlidar										#雷达固件
+└── ydlidar						#雷达固件
     ├── CMakeLists.txt
     ├── launch
     │   ├── display.launch
@@ -367,7 +367,7 @@
     │   ├── lidar.rviz
     │   ├── lidar_view.launch	
     │   ├── ydlidar_distoration.launch			#启动畸变矫正
-    │   └── ydlidar.launch									#不使用畸变矫正
+    │   └── ydlidar.launch				#不使用畸变矫正
     ├── LICENSE
     ├── meshes
     │   ├── ydlidar.dae
