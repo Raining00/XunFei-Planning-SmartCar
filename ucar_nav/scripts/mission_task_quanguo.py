@@ -73,7 +73,7 @@ class mission_task:
         self.state = 0
         self.current_map_pose = PoseStamped()
         self.last_map_pose = PoseStamped()
-        self.min_distance = [0.2,0.15,0.15]
+        self.min_distance = [0.2,0.15,0.2]
         self.time_wait = time.time()
 
     def Run(self):
@@ -97,9 +97,7 @@ class mission_task:
         elif self.state == 3:
             if distance < self.min_distance[self.goal_id-1]:
                 temp_msg = Twist()
-                temp_msg.linear.x = 1
                 temp_msg.linear.y = 1
-                temp_msg.linear.z = 40.0
                 self.change_pub.publish(temp_msg)
                 self.current_goal = list2PoseStemped(self.parking_list[int(self.mark_id)])
                 self.current_goal.header.stamp = rospy.Time.now()

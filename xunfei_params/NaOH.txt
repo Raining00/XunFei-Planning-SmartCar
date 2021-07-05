@@ -7,11 +7,12 @@ trajectory_opt {
     teb_autosize: True
     dt_ref: 0.15
     dt_hysteresis: 0.01
-    global_plan_overwrite_orientation: true
-    allow_init_with_backwards_motion: false
+    global_plan_overwrite_orientation: True
+    allow_init_with_backwards_motion: False
     global_plan_viapoint_sep: 0.3
-    via_points_ordered: false
-    max_global_plan_lookahead_dist: 0.9
+    via_points_ordered: False   
+    max_global_plan_lookahead_dist: 0.6 # 0.65 0.7
+
     exact_arc_length: False
     force_reinit_new_goal_dist: 0.3
     feasibility_check_no_poses: 5
@@ -21,16 +22,16 @@ trajectory_opt {
 }
 
 kinematics_opt {
-    max_vel_x: 0.5
+    max_vel_x: 1.0
     max_vel_x_backwards: 1.0
-    max_vel_y: 0.2
-    max_vel_theta: 1.0
-    acc_lim_x: 1.0
-    acc_lim_y: 0.2
-    acc_lim_theta: 0.2
+    max_vel_y: 1.0
+    max_vel_theta: 2.6
+    acc_lim_x: 2.5
+    acc_lim_y: 2.5
+    acc_lim_theta: 5.0
     min_turning_radius: 0
     wheelbase: 0
-    cmd_angle_instead_rotvel: false
+    cmd_angle_instead_rotvel: False
 }
 
 tolerance_opt {
@@ -40,7 +41,7 @@ tolerance_opt {
 }
 
 obstacles_opt {
-    min_obstacle_dist: 0.155 #0.32
+    min_obstacle_dist: 0.150 #0.32
     inflation_dist: 0.155 # 0
     include_costmap_obstacles: True
     costmap_obstacles_behind_robot_dist: 0.3 # 0.1

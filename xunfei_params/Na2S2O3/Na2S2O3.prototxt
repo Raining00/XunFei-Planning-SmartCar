@@ -11,7 +11,8 @@ trajectory_opt {
     allow_init_with_backwards_motion: False
     global_plan_viapoint_sep: 0.3
     via_points_ordered: False   
-    max_global_plan_lookahead_dist: 0.6  # 0.65 0.7
+    max_global_plan_lookahead_dist: 0.5 # 0.65 0.7
+
     exact_arc_length: False
     force_reinit_new_goal_dist: 0.3
     feasibility_check_no_poses: 5
@@ -21,13 +22,13 @@ trajectory_opt {
 }
 
 kinematics_opt {
-    max_vel_x: 0.8
+    max_vel_x: 1.0
     max_vel_x_backwards: 1.0
-    max_vel_y: 0.8
-    max_vel_theta: 2.6
-    acc_lim_x: 2.5
-    acc_lim_y: 2.5
-    acc_lim_theta: 5.0
+    max_vel_y: 1.0
+    max_vel_theta: 2.5
+    acc_lim_x: 0.8
+    acc_lim_y: 3.0
+    acc_lim_theta: 3.0
     min_turning_radius: 0
     wheelbase: 0
     cmd_angle_instead_rotvel: False
@@ -40,8 +41,8 @@ tolerance_opt {
 }
 
 obstacles_opt {
-    min_obstacle_dist: 0.155 #0.32
-    inflation_dist: 0.170 # 0
+    min_obstacle_dist: 0.150 #0.32
+    inflation_dist: 0.155 # 0
     include_costmap_obstacles: True
     costmap_obstacles_behind_robot_dist: 0.3 # 0.1
     obstacle_poses_affected: 30  # 30

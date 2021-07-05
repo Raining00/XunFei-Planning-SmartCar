@@ -36,7 +36,7 @@ def list2PoseStemped(Point):
  #6: finishing 
 class mission_task:
     def __init__(self,goal_path,parking_path):
-        self.amcl_sub = rospy.Subscriber("/amcl_pose",PoseStamped,self.amclCallback,queue_size=2)
+        self.amcl_sub = rospy.Subscriber("/amcl_pose",PoseWithCovarianceStamped,self.amclCallback,queue_size=2)
         self.voice_sub = rospy.Subscriber("nav_start",Twist,self.voiceCallback,queue_size=1)
         #self.person_sub = rospy.Subscriber("/person_num",Twist,self.personNumCallback,queue_size=1)
         self.parking_sub = rospy.Subscriber("/marker_id",Twist,self.markerCallback,queue_size=1)
@@ -71,14 +71,19 @@ class mission_task:
         self.current_goal.header.frame_id = "map"
         
         self.state = 0
-        self.current_map_pose = PoseStamped()
-        self.last_map_pose = PoseStamped()
-        self.min_distance = [0.2,0.15,0.15]
-        self.time_wait = time.time()
+        self.current_map_pose = PoseWithCovarianceStamped()
+        self.last_map_pose = PoseWithCovarianceStamped()
+        self.min_distance = [0.5,0.15,0.15]
+        
+
+
+        #Exception handling
+        self.time_start = time.time()
+        self.wait_time = [10,10,10,10]
 
     def Run(self):
-        dx = self.current_goal.pose.position.x - self.current_map_pose.pose.position.x
-        dy = self.current_goal.pose.position.y - self.current_map_pose.pose.position.y
+        dx = self.current_goal.pose.position.x - self.current_map_pose.pose.pose.position.x
+        dy = self.current_goal.pose.position.y - self.current_map_pose.pose.pose.position.y
         distance = math.sqrt(dx*dx + dy*dy)
         if self.state == 0:
             return
@@ -94,26 +99,28 @@ class mission_task:
                 self.current_goal.header.stamp = rospy.Time.now()
                 self.goal_pub.publish(self.current_goal)
                 self.goal_id+=1
+                self.time_start = time.time()
         elif self.state == 3:
             if distance < self.min_distance[self.goal_id-1]:
                 temp_msg = Twist()
                 temp_msg.linear.x = 1
                 temp_msg.linear.y = 1
-                temp_msg.linear.z = 40.0
+                temp_msg.linear.z = 20.0
                 self.change_pub.publish(temp_msg)
                 self.current_goal = list2PoseStemped(self.parking_list[int(self.mark_id)])
                 self.current_goal.header.stamp = rospy.Time.now()
                 self.goal_pub.publish(self.current_goal)
                 self.state = 4
-                self.time_wait = time.time()
+                self.time_start = time.time()
         elif self.state == 4:
             if distance<0.2:
                 if self.food_voice == False:
+                    self.time_start = time.time()
                     #playsound('/home/ucar/voice_ws/src/voice_library/delicious_full.wav')
                     playsound('/home/ucar/voice_ws/src/voice_library/'+str(int(self.mark_id))+'.wav')
                     playsound('/home/ucar/voice_ws/src/voice_library/waitng_personnum.wav')
+		    self.time_start = time.time()
                     self.food_voice = True
-                if time.time() - self.time_wait >= 5:
                     self.state = 5
         elif self.state == 5:
             self.person_client()
@@ -121,6 +128,7 @@ class mission_task:
 	    rospy.loginfo("戴眼镜 :%d 长头发: %d",self.glasses_num,self.longhair_num)
             print("finished!")
 	    #self.state = 6
+        self.check_exception()
             
 
     def person_client(self):
@@ -133,6 +141,18 @@ class mission_task:
         except rospy.ServiceException as e:
             print("service call failed: %s"%e)
 
+    def check_exception(self):
+        if time.time() - self.time_start >= self.wait_time[self.goal_id-1]:
+            if self.state == 4:
+                playsound('/home/ucar/voice_ws/src/voice_library/'+str(int(self.mark_id))+'.wav')
+                playsound('/home/ucar/voice_ws/src/voice_library/waitng_personnum.wav')
+                self.state = 5
+            elif self.state != 0 and self.state != 4 and self.goal_id != len(self.nav_list):
+                self.current_goal = list2PoseStemped(self.nav_list[self.goal_id])
+                self.current_goal.header.stamp = rospy.Time.now()
+                self.goal_pub.publish(self.current_goal)
+                self.goal_id+=1
+                self.time_start = time.time()
 
 
     def broadcast(self):
@@ -148,17 +168,7 @@ class mission_task:
 
     def amclCallback(self,pose):
         self.current_map_pose = pose
-        dx = self.current_map_pose.pose.position.x - self.last_map_pose.pose.position.x
-        dy = self.current_map_pose.pose.position.y - self.last_map_pose.pose.position.y
-        if dx*dx + dy*dy > 9:
-	    #initial_pose = PoseWithCovarianceStamped()
-	    #initial_pose.header.stamp = rospy.Time.now()
-	    #initial_pose.pose.pose = self.last_map_pose.pose
-            #self.reinit_pub.publish(initial_pose)
-	    rospy.loginfo("relocalization!!")
-        else:
-            self.last_map_pose = self.current_map_pose
-            self.Run()
+        self.Run()
 
     def voiceCallback(self,msg):
         if msg.linear.x == 1:
@@ -167,20 +177,12 @@ class mission_task:
             self.goal_pub.publish(self.current_goal)
             self.goal_id+=1
             self.state = 1
+            self.time_start = time.time()
+
     
     def markerCallback(self,msg):
         self.mark_id = msg.linear.x
-        #self.current_goal = list2PoseStemped(self.nav_list[-1])
-        #self.current_goal.header.stamp = rospy.Time.now()
-        #self.goal_pub.publish(self.current_goal)
         self.mark_recived = True
-        #self.state = 3
-
-    #def personNumCallback(self,personNum):
-        #if personNum.linear.x <4 and personNum.linear.y<4:
-            #self.glasses_num = personNum.linear.x
-            #self.longhair_num = personNum.linear.y
-            #self.broadcast()
 
 if __name__=='__main__':
     try:
