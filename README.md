@@ -236,31 +236,31 @@
 │       ├── FricWhl.srv
 │       ├── GimbalMode.srv
 │       └── ShootCmd.srv
-├── roborts_planning								#运动规划算法包
+├── roborts_planning					#运动规划算法包
 │   ├── CMakeLists.txt
 │   ├── cmake_module
-│   ├── global_planner								#全局路径规划算法
-│   │   ├── a_star_planner					A*算法实现
+│   ├── global_planner					#全局路径规划算法
+│   │   ├── a_star_planner				A*算法实现
 │   │   ├── CMakeLists.txt
 │   │   ├── config
 │   │   ├── global_planner_algorithms.h			#全局路径规划模块内通用算法
-│   │   ├── global_planner_base.h					  #全局路径规划基类，算法类需要从该基类进行派生
-│   │   ├── global_planner_node.cpp				#全局路径规划主节点
+│   │   ├── global_planner_base.h			#全局路径规划基类，算法类需要从该基类进行派生
+│   │   ├── global_planner_node.cpp			#全局路径规划主节点
 │   │   ├── global_planner_node.h
 │   │   ├── global_planner_test.cpp
 │   │   ├── informed_rrt_star_planner			#启发式快速搜索随机生成树规划算法实现
 │   │   └── proto
-│   ├── local_planner											#局部路径规划
+│   ├── local_planner					#局部路径规划
 │   │   ├── CMakeLists.txt
 │   │   ├── config
 │   │   ├── include
 │   │   ├── README.md
 │   │   ├── src
-│   │   └── timed_elastic_band							#TEB规划算法
-│   └── package.xml
-├── startup_scripts												#初始化脚本（仅在第一次使用小车时运行）
+│   │   └── timed_elastic_band					#TEB规划算法
+│   └── package.xml	
+├── startup_scripts						#初始化脚本（仅在第一次使用小车时运行）
 │   └── initdev_mini.sh
-├── ucar_controller												#底盘通信节点功能包
+├── ucar_controller						#底盘通信节点功能包
 │   ├── CHANGELOG.md
 │   ├── CMakeLists.txt
 │   ├── config
@@ -269,7 +269,7 @@
 │   ├── include
 │   │   └── ucar_controller
 │   ├── launch
-│   │   ├── base_driver.launch							#启动底盘通信节点
+│   │   ├── base_driver.launch					#启动底盘通信节点
 │   │   └── tf_server.launch
 │   ├── log_info
 │   │   ├── car_Mileage_info.txt
