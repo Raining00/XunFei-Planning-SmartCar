@@ -22,7 +22,7 @@ para_costmap_interface {
   has_friend_layer: false
   has_detection_layer: false
   inflation_file_path: "/config/inflation_layer_config.prototxt"
-  map_update_frequency: 5
+  map_update_frequency: 8
 }
 footprint {
   point {
