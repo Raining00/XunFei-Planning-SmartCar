@@ -57,6 +57,7 @@ class ChassisExecutor{
    * @brief Cancel the current task and deal with the mode transition
    */
   void Cancel();
+  void StopCallback(const geometry_msgs::Twist::ConstPtr &msg);
 
  private:
   /***
@@ -80,6 +81,7 @@ class ChassisExecutor{
 
   //! velocity control publisher in ROS
   ros::Publisher cmd_vel_pub_;
+  ros::Subscriber stop_sub;
   //! zero twist in form of ROS geometry_msgs::Twist
   geometry_msgs::Twist zero_twist_;
 

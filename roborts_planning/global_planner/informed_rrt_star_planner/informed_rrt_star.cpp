@@ -227,7 +227,7 @@ namespace roborts_global_planner
                 dis = std::sqrt(diff_x * diff_x +diff_y*diff_y);
                 /*
                     since in some place especially the straight  and free place few point can be sparse which is not a good news for 
-                    local plan to purge a global path within our architecture. Thus lwe insert some point between tow states
+                    local plan to purge a global path within our architecture. Thus we insert some point between tow states
                     interpolation: we choose the easiest way to interpolation. This may be not the best approach but it also obtains a efficient path
                 */
                 if(dis > 0.1)

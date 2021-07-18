@@ -747,8 +747,12 @@ void TebLocalPlanner::ReloadParams(unsigned int mode)
 
       break;
     case 2:
+    full_path = ros::package::getPath("roborts_planning") + "/local_planner/timed_elastic_band/config/"
+                                                              "2.prototxt";
       break;
     case 3:
+    full_path = ros::package::getPath("roborts_planning") + "/local_planner/timed_elastic_band/config/"
+                                                              "3.prototxt";
       break;
   }
 
