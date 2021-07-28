@@ -124,8 +124,16 @@ class GlobalPlannerNode {
    * @param pose2 The second pDose in the form of geometry_msgs::PoseStamped
    * @return The Euclidean distance
    */
+
   double GetDistance(const geometry_msgs::PoseStamped& pose1,
                      const geometry_msgs::PoseStamped& pose2);
+
+  /**
+   * @brief change mode call back
+   * @param msg whick mode to change
+   * */
+  void ChangeMode(const geometry_msgs::Twist::ConstPtr &msg);
+
   /**
    * @brief Get the angle difference of two pose .
    * @param pose1 The first pose in the form of geometry_msgs::PoseStamped
@@ -144,6 +152,7 @@ class GlobalPlannerNode {
   ros::NodeHandle nh_;
   //! ROS Publisher for path visualization in rviz
   ros::Publisher path_pub_;
+  ros::Subscriber  change_sub;
   //! ROS Actionlib Server for command global planning module
   GlobalPlannerServer as_;
   //! Global planner pointer

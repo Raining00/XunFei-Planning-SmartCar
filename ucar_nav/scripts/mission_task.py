@@ -73,7 +73,7 @@ class mission_task:
         self.state = 0
         self.current_map_pose = PoseStamped()
         self.last_map_pose = PoseStamped()
-        self.min_distance = [0.2,0.15,0.2]
+        self.min_distance = [0.2,0.15,0.15]
         self.time_wait = time.time()
 
     def Run(self):

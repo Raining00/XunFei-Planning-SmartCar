@@ -1,0 +1,6 @@
+outlier_distance_threshold : 0.03
+inlier_distance_threshold : 0.05
+cluster_tolerance : 0.1
+min_cluster_size : 8
+distance_threshold : 0.3 # tracking threshold
+query_threshold : 0.5 # query threshold

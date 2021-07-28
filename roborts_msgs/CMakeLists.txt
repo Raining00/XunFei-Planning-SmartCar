@@ -63,6 +63,7 @@ add_service_files(
   DIRECTORY srv
   FILES
   GimbalMode.srv
+  Obstacles.srv
   FricWhl.srv
   ShootCmd.srv
 )
