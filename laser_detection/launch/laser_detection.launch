@@ -1,0 +1,6 @@
+<launch>
+    <rosparam command="load" file="$(find laser_detection)/config/laser_detection.yaml"/>
+    <node pkg="laser_detection" name="laser_detection_node" type="laser_detection_node" respawn="false"
+          output="screen"/>
+   <node pkg="laser_detection" name="laser_tracking_node" type="laser_tracking_node" respawn="false" output="screen"/>-->
+</launch>

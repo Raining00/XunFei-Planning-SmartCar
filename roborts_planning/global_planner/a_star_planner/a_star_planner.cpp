@@ -288,6 +288,9 @@ void AStarPlanner::GetChebyshevDistance(const int &index1, const int &index2, fl
 void AStarPlanner::GetDialogDistance(const int &index1, const int &index2 ,float &dialog_distance)const{
   int dx =  fabs(index1 / gridmap_width_ - index2 / gridmap_width_);
   int dy = fabs(index1 % gridmap_width_ - index2 % gridmap_width_);
+  int dialog = std::min(dx,dy);
+  dx -= dialog;
+  dy -= dialog;
   dialog_distance = dx + dy + (1.414-2)*std::min(dx,dy);
 }
 

@@ -40,7 +40,6 @@ class GoalBehavior {
 
   //! perception information
   Blackboard* const blackboard_;
-
   //! planning goal
   geometry_msgs::PoseStamped planning_goal_;
 

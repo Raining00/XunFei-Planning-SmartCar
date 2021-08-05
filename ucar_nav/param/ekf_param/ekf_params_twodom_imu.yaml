@@ -1,5 +1,5 @@
 #里程计+imu
-frequency: 30
+frequency: 20
 sensor_timeout: 0.025
 two_d_mode: true
 transform_time_offset: 0.0001
