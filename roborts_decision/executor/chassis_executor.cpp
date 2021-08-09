@@ -8,6 +8,7 @@ ChassisExecutor::ChassisExecutor():execution_mode_(ExcutionMode::IDLE_MODE), exe
                                   local_planner_client_("local_planner_node_action", true)
 {
   ros::NodeHandle nh;
+  stop_sub = nh.subscribe("/stop_nav",1,&ChassisExecutor::StopCallback,this);
   cmd_vel_acc_pub_ = nh.advertise<roborts_msgs::TwistAccel>("cmd_vel_acc", 100);
   cmd_vel_pub_     = nh.advertise<geometry_msgs::Twist>("cmd_vel", 1);
   global_planner_client_.waitForServer();
@@ -23,6 +24,11 @@ void ChassisExecutor::Execute(const geometry_msgs::PoseStamped &goal){
                                   GlobalActionClient::SimpleDoneCallback(),
                                   GlobalActionClient::SimpleActiveCallback(),
                                   boost::bind(&ChassisExecutor::GlobalPlannerFeedbackCallback, this, _1));
+}
+void ChassisExecutor::StopCallback(const geometry_msgs::Twist::ConstPtr &msg)
+{
+  if(msg->linear.x == 1)
+   Cancel();
 }
 
 void ChassisExecutor::Execute(const geometry_msgs::Twist &twist){

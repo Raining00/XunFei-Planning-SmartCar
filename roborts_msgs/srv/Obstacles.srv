@@ -1,0 +1,7 @@
+float32 x
+float32 y
+float32 pos_x
+float32 pos_y
+int8 type
+---
+bool errorInfo
