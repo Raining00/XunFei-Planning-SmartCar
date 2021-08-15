@@ -23,11 +23,11 @@
     <param name="~imu_euler_y"  value=" 0.0"/>
 
     <param name="~camera_frame"  value="camera_frame"/>
-    <param name="~lidar_frame"   value="laser_frame"/>
-    <param name="~imu_frame"     value="imu_frame"/>
+    <param name="~lidar_frame"   value="base_laser_link"/>
+    <param name="~imu_frame"     value="imu"/>
     
-    <param name="~base_frame"    value="base_footprint"/>
+    <param name="~base_frame"    value="base_link"/>
     <!-- tf_rate 是指tf的发布频率 -->
-    <param name="~tf_rate"       value="30"/>
+    <param name="~tf_rate"       value="100"/>
   </node>
 </launch> 

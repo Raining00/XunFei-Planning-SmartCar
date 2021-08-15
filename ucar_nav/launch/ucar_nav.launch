@@ -1,0 +1,27 @@
+<launch>
+  <master auto="start"/>
+  <arg name="map" value="map2021616"/>
+  <param name="/use_sim_time" value="false"/>
+    <!-- 运行地图服务器，并且加载设置的地图-->
+    <node name="map_server" pkg="map_server" type="map_server" args="$(find ucar_nav)/maps/$(arg map).yaml" output="screen">
+    <param name="frame_id" value="map" />
+    </node>
+
+    <include file="$(find ucar_controller)/launch/base_driver.launch" > </include>
+    <include file="$(find lidar_undistortion)/launch/lidar_undistortion_online.launch" > </include>
+
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
+    <rosparam command="load" file="$(find ucar_nav)/param/ekf_param/ekf_params_twodom_imu.yaml"/>
+    </node>
+
+    <!-- 运行amcl节点 -->
+    <include file="$(find ucar_nav)/launch/amcl.launch"/>
+    <include file="$(find ucar_nav)/launch/config/move_base.launch"/>
+
+</launch>
+
+
+
+
+
+

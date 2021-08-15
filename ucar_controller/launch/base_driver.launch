@@ -5,5 +5,4 @@
   </node>
       <node pkg="tf" type="static_transform_publisher" name="imu_link"
     args="0.05 -0.05 0.05 0.0 0.0  0.0 /base_link /imu 10" />
-  <!-- <node pkg="joy" name="joy_node" type="joy_node"/> -->
 </launch> 

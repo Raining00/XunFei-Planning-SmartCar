@@ -31,7 +31,7 @@ class SensorTFServer:
         self.imu_euler_y = rospy.get_param('~imu_euler_y', 0.0)
 
         self.camera_frame = rospy.get_param("~camera_frame", "cam")
-        self.lidar_frame  = rospy.get_param("~lidar_frame" , "lidar")
+        self.lidar_frame  = rospy.get_param("~lidar_frame" , "base_laser_link")
         self.imu_frame    = rospy.get_param("~imu_frame"   , "imu")
         self.base_frame   = rospy.get_param("~base_frame"  , "base_link")
 

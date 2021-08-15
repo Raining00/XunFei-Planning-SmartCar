@@ -310,9 +310,15 @@ void LocalPlannerNode::changeCallback(const geometry_msgs::Twist::ConstPtr &msg)
 {
   if (msg->linear.x != 0)
   {
-    frequency_ = msg->linear.z;
+    std::chrono::microseconds sleep_time = std::chrono::microseconds(0);
+    std::unique_lock<std::mutex> plan_lock(plan_mutex_);
+    plan_condition_.wait_for(plan_lock, sleep_time);
     local_planner_->ReloadParams(msg->linear.x);
-    ROS_INFO("mode has changed! frequency = %2f",frequency_);
+    if(msg->linear.z != 0)
+    {
+      frequency_ = msg->linear.z;
+      ROS_WARN("mode has changed! frequency = %2f",frequency_);
+    }
   }
 }
 

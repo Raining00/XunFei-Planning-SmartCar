@@ -5,7 +5,7 @@ para_basic {
 para_costmap_interface {
   global_frame: "map"
   robot_base_frame: "base_link"
-  footprint_padding: 0.05
+  footprint_padding: 0.01
   transform_tolerance: 1.0
   distance_threshold: 1.0
   map_width: 4.0
@@ -26,20 +26,20 @@ para_costmap_interface {
 }
 footprint {
   point {
-    x: -0.180
-    y: -0.128
+    x: -0.170
+    y: -0.120
   }
   point {
-    x: -0.180
-    y: 0.128
+    x: -0.170
+    y: 0.120
   }
   point {
-    x: 0.180
-    y: 0.128
+    x: 0.170
+    y: 0.120
   }
   point {
-    x: 0.180
-    y: -0.128
+    x: 0.170
+    y: -0.120
   }
 }
 
