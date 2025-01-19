@@ -4,7 +4,9 @@
 
 #### 介绍
 
-本仓库用存放北京科技大学ROS组讯飞智慧餐厅线下赛代码，持续更新优化
+本仓库用存放北京科技大学第十六届全国大学生智能汽车竞赛ROS组讯飞智慧餐厅线下赛代码。
+全国选拔赛(兰州赛区)的成绩可在[这里](https://blog.csdn.net/zhuoqingjoking97298/article/details/119576065?ops_request_misc=%257B%2522request%255Fid%2522%253A%252213312710c4bcdc9d467bea2a7dd54afd%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=13312710c4bcdc9d467bea2a7dd54afd&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-3-119576065-null-null.nonecase&utm_term=%E8%AE%AF%E9%A3%9E%E6%99%BA%E6%85%A7&spm=1018.2226.3001.4450)查看。
+全国总决赛的成绩可在[这里](https://blog.csdn.net/zhuoqingjoking97298/article/details/119870794)查看。
 
 #### 软件架构
 
